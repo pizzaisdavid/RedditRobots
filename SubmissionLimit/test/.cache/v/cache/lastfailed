@@ -1,1 +1,3 @@
-{}
+{
+  "test_FrequencyTable.py::test_buildUserSubmissionFrequencyTable": true
+}
