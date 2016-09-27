@@ -9,10 +9,8 @@ class RedditFacade(RedditWrapper):
         self.unix_timestamp = unix_timestamp
         self.logger.info('Initializing with {timestamp} Unix timestamp.'.format(timestamp=unix_timestamp))
         
-    def getSubredditSubmissionsWithin(self, subreddit_name, time_limit_in_hours):
-        self.logger.debug('Fetching submissions from {subreddit} made within the last {limit} hours.'
-                         .format(subreddit=subreddit_name, limit=time_limit_in_hours))
-        submission_limit = 100
+    def getSubredditSubmissionsWithin(self, subreddit_name, time_limit_in_hours, submission_limit=100):
+        self.logger.debug('Fetching submissions from {subreddit} made within the last {limit} hours.'.format(subreddit=subreddit_name, limit=time_limit_in_hours))
         submissions_within_time_frame = []
         subreddit = self.reddit.get_subreddit(subreddit_name)
         submissions = subreddit.get_new(limit=submission_limit)
@@ -21,8 +19,7 @@ class RedditFacade(RedditWrapper):
                 submissions_within_time_frame.append(s)
             else:
                 break
-        self.logger.info('Found {count} submissions made within the past {limit} hours'
-                         .format(count=len(submissions_within_time_frame), limit=time_limit_in_hours))
+        self.logger.info('Found {count} submissions made within the past {limit} hours'.format(count=len(submissions_within_time_frame), limit=time_limit_in_hours))
         return submissions_within_time_frame
     
     def isWithinTimeLimit(self, submission, time_limit_in_hours):
