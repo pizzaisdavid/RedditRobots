@@ -1,4 +1,4 @@
-from RedditWrapper import RedditWrapper
+import RedditWrapper
 import logging
 
 class RedditFacade(RedditWrapper):
