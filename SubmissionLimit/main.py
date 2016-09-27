@@ -1,5 +1,4 @@
-from RedditFacade import RedditFacade
-from FrequencyTable import buildUserSubmissionFrequencyTable
+import praw
 import logging
 import datetime
 import calendar
@@ -7,6 +6,9 @@ import time
 
 import Credentials
 import Settings
+from RedditFacade import RedditFacade
+from FrequencyTable import buildUserSubmissionFrequencyTable
+
 
 
 logging.basicConfig(level=logging.DEBUG)
@@ -15,12 +17,13 @@ def main():
     logger = logging.getLogger(__name__)
     logger.info('Initializing.')
     unix_timestamp = getCurrentTime()
-    r = RedditFacade(Settings.user_agent, unix_timestamp)
+    reddit = praw.Reddit(Settings.user_agent)
+    r = RedditFacade(reddit, unix_timestamp)
     r.login(Credentials.username, Credentials.password)
     
     submissions = r.getSubredditSubmissionsWithin(Settings.subreddit_name, Settings.time_frame)
     
-    table = buildUserSubmissionFrequencyTable(submssions)
+    table = buildUserSubmissionFrequencyTable(submissions)
     
     for s in submissions:
         print(s)

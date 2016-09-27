@@ -1,13 +1,6 @@
-import praw
 import logging
 
 class RedditFacade():
-    def __init__(self, user_agent, unix_timestamp):
-        self.logger = logging.getLogger(__name__)
-        self.logger.info('Registering user agent with Reddit.')
-        self.reddit = praw.Reddit(user_agent)
-        self.unix_timestamp = unix_timestamp
-        self.logger.info('Initializing with {timestamp} Unix timestamp.'.format(timestamp=unix_timestamp))
         
     def __init__(self, reddit, unix_timestamp):
         self.logger = logging.getLogger(__name__)
@@ -16,7 +9,7 @@ class RedditFacade():
         self.logger.info('Initializing with {timestamp} Unix timestamp.'.format(timestamp=unix_timestamp))
         
     def login(self, username, password):
-        self.logger.info('Logging into Reddit {username} account.'.format(username=username))
+        self.logger.info('Logging into Reddit with {username} account.'.format(username=username))
         self.reddit.login(username, password, disable_warning=True)
         self.logger.info('Logged into Reddit.')
         
