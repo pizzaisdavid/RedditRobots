@@ -1,3 +1,3 @@
-user_agent = 'testing praw'
-username = 'password'
-password = 'username'
+user_agent = 'testing PRAW'
+username = 'username'
+password = 'password'

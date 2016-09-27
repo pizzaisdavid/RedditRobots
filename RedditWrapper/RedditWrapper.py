@@ -11,3 +11,4 @@ class RedditWrapper():
     def login(self, username, password):
         self.logger.info('Logging into Reddit account: {username}'.format(username=username))
         self.reddit.login(username, password, disable_warning=True)
+
