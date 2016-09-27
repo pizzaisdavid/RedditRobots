@@ -3,10 +3,11 @@ import logging
 
 class RedditFacade(RedditWrapper):
     
-    def __init__(self, user_agent):
+    def __init__(self, user_agent, unix_timestamp):
         RedditWrapper.__init__(self, user_agent)
         self.logger = logging.getLogger(__name__)
-        self.logger.info('Initializing.')
+        self.unix_timestamp = unix_timestamp
+        self.logger.info('Initializing with {timestamp} Unix timestamp.'.format(timestamp=unix_timestamp))
         
     def getSubredditSubmissionsWithin(self, subreddit_name, time_limit_in_hours):
         self.logger.debug('Fetching submissions from {subreddit} made within the last {limit} hours.'
