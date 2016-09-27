@@ -1,4 +1,5 @@
 from RedditFacade import RedditFacade
+from FrequencyTable import buildUserSubmissionFrequencyTable
 import logging
 import datetime
 import calendar
@@ -17,18 +18,18 @@ def main():
     r = RedditFacade(Settings.user_agent, unix_timestamp)
     r.login(Credentials.username, Credentials.password)
     
-    submissions = r.getSubredditSubmissionsWithin(Settings.subreddit_name,
-                                                  Settings.time_frame)
+    submissions = r.getSubredditSubmissionsWithin(Settings.subreddit_name, Settings.time_frame)
+    
+    table = buildUserSubmissionFrequencyTable(submssions)
     
     for s in submissions:
         print(s)
-        
-def get_date(submission):
-    time = submission.created_utc
-    return datetime.datetime.fromtimestamp(time)
 
 def getCurrentTime():
     return calendar.timegm(time.gmtime())
+
+def buildSubmissionTable(submissions):
+    return submissions
         
 if __name__ == '__main__':
     main()

@@ -1,24 +1,11 @@
 import praw
 import logging
 
-
-class RedditWrapper():
-    
-    def __init__(self, user_agent):
+class RedditFacade():
+    def __init__(self, user_agent, unix_timestamp):
         self.logger = logging.getLogger(__name__)
         self.logger.info('Registering user agent with Reddit.')
         self.reddit = praw.Reddit(user_agent)
-        
-    def login(self, username, password):
-        self.logger.info('Logging into Reddit {username} account.'.format(username=username))
-        self.reddit.login(username, password, disable_warning=True)
-        self.logger.info('Logged into Reddit.')
-
-
-class RedditFacade(RedditWrapper):
-    def __init__(self, user_agent, unix_timestamp):
-        RedditWrapper.__init__(self, user_agent)
-        self.logger = logging.getLogger(__name__)
         self.unix_timestamp = unix_timestamp
         self.logger.info('Initializing with {timestamp} Unix timestamp.'.format(timestamp=unix_timestamp))
         

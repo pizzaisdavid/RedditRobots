@@ -2,10 +2,12 @@ import pytest
 from unittest.mock import Mock
 import datetime
 import time
+import logging
 
 from .MockRedditHelper import *
 from ..RedditFacade import RedditFacade
 
+logging.basicConfig(level=logging.DEBUG)
 
 def test_getSubredditSubmissionsWithin():
     YEAR = 2014
