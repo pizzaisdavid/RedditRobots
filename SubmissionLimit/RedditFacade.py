@@ -1,13 +1,24 @@
-from RedditWrapper import RedditWrapper
+import praw
 import logging
 
-class RedditFacade(RedditWrapper):
+class RedditFacade():
     
     def __init__(self, user_agent, unix_timestamp):
-        RedditWrapper.__init__(self, user_agent)
         self.logger = logging.getLogger(__name__)
+        self.reddit = praw.Reddit(user_agent)
         self.unix_timestamp = unix_timestamp
         self.logger.info('Initializing with {timestamp} Unix timestamp.'.format(timestamp=unix_timestamp))
+        
+    def __init__(self, reddit, unix_timestamp):
+        self.logger = logging.getLogger(__name__)
+        self.reddit = reddit
+        self.unix_timestamp = unix_timestamp
+        self.logger.info('Initializing with {timestamp} Unix timestamp.'.format(timestamp=unix_timestamp))
+        
+    def login(self, username, password):
+        self.logger.info('Logging into Reddit {username} account.'.format(username=username))
+        self.reddit.login(username, password, disable_warning=True)
+        self.logger.info('Logged into Reddit.')
         
     def getSubredditSubmissionsWithin(self, subreddit_name, time_limit_in_hours, submission_limit=100):
         self.logger.debug('Fetching submissions from {subreddit} made within the last {limit} hours.'.format(subreddit=subreddit_name, limit=time_limit_in_hours))
