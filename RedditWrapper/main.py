@@ -11,7 +11,7 @@ def main():
     logger = logging.getLogger(__name__)
     logger.info('Initializing.')
     r = RedditFacade(Settings.user_agent)
-    r.login(Credentials.username, Credentails.password)
+    r.login(Credentials.username, Credentials.password)
     
     
     
