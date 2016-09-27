@@ -1,7 +1,9 @@
 from RedditFacade import RedditFacade
 import logging
 
+import Credentials
 import Settings
+
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -9,7 +11,7 @@ def main():
     logger = logging.getLogger(__name__)
     logger.info('Initializing.')
     r = RedditFacade(Settings.user_agent)
-    #r.login(Settings.username, Settings.password)
+    r.login(Credentials.username, Credentails.password)
     
     
     
