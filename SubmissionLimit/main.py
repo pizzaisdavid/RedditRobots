@@ -1,4 +1,3 @@
-import praw
 import logging
 
 import Credentials
