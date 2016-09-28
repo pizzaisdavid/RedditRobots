@@ -1,6 +1,15 @@
 import logging
+import praw
+import datetime
+import calendar
+import time
 
 class RedditFacade():
+    
+    def factory(user_agent):
+        unix_timestamp = getCurrentTime()
+        reddit = praw.Reddit(user_agent)
+        return RedditFacade(reddit, unix_timestamp)
         
     def __init__(self, reddit, unix_timestamp):
         self.logger = logging.getLogger(__name__)
@@ -30,3 +39,6 @@ class RedditFacade():
         time_limit_in_seconds = time_limit_in_hours * 60 * 60
         deadline = self.unix_timestamp - time_limit_in_seconds;
         return deadline < submission.created_utc
+    
+def getCurrentTime():
+    return calendar.timegm(time.gmtime())
