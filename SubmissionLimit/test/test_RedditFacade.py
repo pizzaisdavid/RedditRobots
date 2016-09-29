@@ -5,7 +5,7 @@ import time
 import logging
 
 from .MockRedditHelper import *
-from ..RedditFacade import RedditFacade
+from ..src.RedditFacade import RedditFacade
 
 logging.basicConfig(level=logging.DEBUG)
 

@@ -1,7 +1,7 @@
 import logging
 import praw
 
-from Clock import getCurrentUnixTime
+from .Clock import getCurrentUnixTime
 
 
 class RedditFacade():

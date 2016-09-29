@@ -5,7 +5,7 @@ import time
 import logging
 
 from .MockRedditHelper import *
-from ..FrequencyTable import *
+from ..src.FrequencyTable import *
 
 def test_buildUserSubmissionFrequencyTable():
     submissions = [
