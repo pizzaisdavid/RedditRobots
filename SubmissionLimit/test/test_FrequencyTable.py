@@ -9,9 +9,9 @@ from ..src.FrequencyTable import *
 
 def test_buildUserSubmissionFrequencyTable():
     submissions = [
-        makeMockSubmission('username', 0),
-        makeMockSubmission('username', 1),
-        makeMockSubmission('username', 2)
+        makeMockSubmission('username'),
+        makeMockSubmission('username'),
+        makeMockSubmission('username')
     ]
     
     table = buildUserSubmissionFrequencyTable(submissions)

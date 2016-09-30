@@ -15,15 +15,16 @@ def test_getSubredditSubmissionsWithin():
     DAY = 22
     HOUR = 14
     MINUTE = 59
+    UNIX_TIMESTAMP = makeUnixTimestamp(YEAR, MONTH, DAY, HOUR, MINUTE)
     mock_reddit = makeMockReddit(
-        makeMockSubreddit([
-            makeMockSubmission('username', makeUnixTimestamp(YEAR, MONTH, DAY, HOUR, MINUTE)),
-            makeMockSubmission('username', makeUnixTimestamp(YEAR, MONTH, DAY, HOUR, MINUTE - 9)),
-            makeMockSubmission('username', makeUnixTimestamp(YEAR, MONTH, DAY - 2, HOUR, MINUTE))
+        makeMockSubreddit(submissions=[
+            makeMockSubmission(timestamp=UNIX_TIMESTAMP),
+            makeMockSubmission(timestamp=UNIX_TIMESTAMP - toSeconds(minutes=9)),
+            makeMockSubmission(timestamp=UNIX_TIMESTAMP - toSeconds(days=3))
         ])
     )
     
-    reddit_facade = RedditFacade(mock_reddit, makeUnixTimestamp(YEAR, MONTH, DAY, HOUR, MINUTE))
+    reddit_facade = RedditFacade(mock_reddit, UNIX_TIMESTAMP)
     new_submissions = reddit_facade.getSubredditSubmissionsWithin('subreddit', 24)
     
     assert len(new_submissions) == 2
