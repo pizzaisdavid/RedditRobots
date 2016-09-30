@@ -25,6 +25,6 @@ def test_getSubredditSubmissionsWithin():
     )
     
     reddit_facade = RedditFacade(mock_reddit, UNIX_TIMESTAMP)
-    new_submissions = reddit_facade.getSubredditSubmissionsWithin('subreddit', 24)
+    new_submissions = reddit_facade.getSubredditSubmissionsWithin('subreddit', time_limit_in_hours=24)
     
     assert len(new_submissions) == 2
