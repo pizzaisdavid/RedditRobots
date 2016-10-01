@@ -18,8 +18,13 @@ def main():
     submissions = r.getSubredditSubmissionsWithin(Settings.subreddit_name, Settings.time_frame)
     table = buildUserSubmissionFrequencyTable(submissions)
     
-    for s in submissions:
-        print(s)
+    #usersOverLimit = table.authorsWithMoreSubmissionsThan(Settings.post_limit)
+    
+    for author in table:
+        submissions = table[author]
+        submssionCount = len(submissions)
+        if submssionCount > Settings.post_limit:
+            print("{author} is a frequent poster, with {count} posts.".format(author=author, count=submssionCount))
 
 def buildSubmissionTable(submissions):
     return submissions
